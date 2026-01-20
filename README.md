@@ -21,9 +21,8 @@ Obsidian is a modern stock analysis platform that helps investors make informed 
 
 ## Tech Stack
 
-**Frontend:** React, React Router, CSS3, SVG  
+**Frontend:** React 
 **API:** Finnhub (stock data, company info, historical prices)  
-**Design:** Glassmorphism, Metropolitan Noir color scheme
 
 ## Roadmap
 
@@ -38,12 +37,6 @@ Obsidian is a modern stock analysis platform that helps investors make informed 
 - User accounts and watchlists
 - Portfolio tracking
 - FastAPI backend for ML-powered predictions
-
-## Screenshots
-
-*Coming soon...*
-
----
 
 **Built by Daniel Deda** | Software Engineer
 [Portfolio](https://dedabase.me)
