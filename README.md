@@ -22,6 +22,7 @@ Obsidian is a modern stock analysis platform that helps investors make informed 
 ## Tech Stack
 
 **Frontend:** React 
+
 **API:** Finnhub (stock data, company info, historical prices)  
 
 ## Roadmap
