@@ -1,0 +1,174 @@
+.market-pulse-section {
+  position: relative;
+  padding: 3rem 0;
+  background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.pulse-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.pulse-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 20px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 10px #ef4444;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+}
+
+.pulse-text {
+  color: #ef4444;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.pulse-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: -0.01em;
+}
+
+.ticker-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(139, 92, 246, 0.2);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.ticker-wrapper::before,
+.ticker-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.ticker-wrapper::before {
+  left: 0;
+  background: linear-gradient(90deg, #050505 0%, transparent 100%);
+}
+
+.ticker-wrapper::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, #050505 100%);
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 2rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.ticker-symbol {
+  font-weight: 700;
+  color: #cbd5e1;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.ticker-value {
+  font-weight: 500;
+  color: #e2e8f0;
+  font-size: 1.1rem;
+}
+
+.ticker-change {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.ticker-change.positive {
+  color: #10b981;
+}
+
+.ticker-change.negative {
+  color: #ef4444;
+}
+
+.ticker-change-value {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.ticker-separator {
+  color: rgba(255, 255, 255, 0.2);
+  font-weight: 300;
+}
+
+.pulse-footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pulse-disclaimer {
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pulse-title {
+    font-size: 1.25rem;
+  }
+  
+  .ticker-item {
+    padding: 0 1.5rem;
+  }
+  
+  .ticker-symbol {
+    font-size: 0.9rem;
+  }
+  
+  .ticker-value {
+    font-size: 1rem;
+  }
+}
