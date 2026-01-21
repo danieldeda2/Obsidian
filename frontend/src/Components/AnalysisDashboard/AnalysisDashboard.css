@@ -1,24 +1,88 @@
 .analysis-dashboard {
   min-height: 100vh;
-  background: linear-gradient(135deg, #050505 0%, #0a0a0a 50%, #0f0f0f 100%);
+  background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
   padding: 2rem;
   color: #e2e8f0;
+  /* Prevent zoom on mobile */
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Force proper scaling */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  /* Prevent zoom on double-tap */
+  touch-action: manipulation;
+}
+
+/* Back Button */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  color: #e2e8f0;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  /* Prevent zoom on mobile when clicking */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.back-button:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+  transform: translateX(-4px);
+}
+
+.back-button:active {
+  transform: translateX(-4px) scale(0.98);
+}
+
+.back-arrow {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-arrow {
+  transform: translateX(-4px);
+}
+
+/* Prevent auto-zoom on all interactive elements */
+button, input, select, textarea {
+  font-size: 16px !important; /* Prevents iOS zoom on focus */
+  touch-action: manipulation;
 }
 
 /* Loading State */
-.dashboard-loading {
+.loading-container,
+.error-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  gap: 2rem;
+  min-height: 60vh;
+  gap: 1rem;
 }
 
 .loading-spinner {
-  width: 60px;
-  height: 60px;
-  border: 4px solid rgba(139, 92, 246, 0.3);
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(139, 92, 246, 0.2);
   border-top-color: #8b5cf6;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -28,83 +92,40 @@
   to { transform: rotate(360deg); }
 }
 
-.loading-text {
-  font-size: 1.5rem;
-  color: #94a3b8;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-}
-
-/* Error State */
-.dashboard-error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  gap: 2rem;
-  text-align: center;
-}
-
-.dashboard-error h2 {
-  font-size: 2rem;
-  color: #ef4444;
-}
-
-/* Header */
+/* Header Section */
 .dashboard-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 3rem;
+  align-items: flex-start;
   padding: 2rem;
-  background: rgba(15, 15, 15, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  gap: 2rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 16px;
+  margin-bottom: 2rem;
 }
 
-.back-button {
-  padding: 0.75rem 1.5rem;
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: 12px;
-  color: #8b5cf6;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
+.stock-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.back-button:hover {
-  background: rgba(139, 92, 246, 0.2);
-  transform: translateX(-5px);
-}
-
-.stock-header-info {
-  flex: 1;
-}
-
-.stock-ticker {
-  font-size: 3rem;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  background: linear-gradient(135deg, #e2e8f0 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.stock-symbol {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
 .stock-name {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #94a3b8;
-  font-weight: 300;
-  margin-top: 0.5rem;
+  margin: 0;
 }
 
-.stock-price-info {
+.price-section {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -112,124 +133,361 @@
 }
 
 .current-price {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #e2e8f0;
+  color: #f8fafc;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 .price-change {
-  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 .price-change.positive {
   color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
 }
 
 .price-change.negative {
   color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
 }
 
-/* Dashboard Content Grid */
-.dashboard-content {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 2rem;
-  margin-bottom: 3rem;
+.change-value {
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
+/* Section Title */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+/* Recommendation Section */
 .recommendation-section {
-  grid-column: 1 / -1;
+  padding: 2rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 16px;
+  margin-bottom: 2rem;
 }
 
-.metrics-section {
-  grid-column: 1 / 7;
+.recommendation-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
+.gauge-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.gauge-svg {
+  width: 100%;
+  height: auto;
+}
+
+.gauge-progress {
+  transition: stroke-dasharray 1s ease-in-out;
+}
+
+.gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-top: -20px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.gauge-label-center {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.recommendation-result {
+  display: flex;
+  justify-content: center;
+}
+
+.recommendation-badge {
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  border: 2px solid;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* Chart Section */
 .chart-section {
-  grid-column: 7 / -1;
+  padding: 2rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 16px;
+  margin-bottom: 2rem;
 }
 
-.risk-section {
-  grid-column: 1 / 7;
+/* Remove all focus/active outlines from chart */
+.chart-section svg,
+.chart-section svg *,
+.recharts-wrapper,
+.recharts-surface,
+.recharts-layer,
+.recharts-area,
+.recharts-rectangle {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Hide the default Recharts selection rectangle */
+.recharts-rectangle.recharts-brush-slide {
+  display: none !important;
+}
+
+.recharts-rectangle {
+  outline: none !important;
+  stroke: none !important;
+}
+
+/* Remove any default selection/focus styles */
+.chart-section *:focus,
+.chart-section *:active {
+  outline: none !important;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.time-range-selector {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.time-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.time-btn:hover {
+  color: #e2e8f0;
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.time-btn:active {
+  transform: scale(0.95);
+}
+
+.time-btn.active {
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.chart-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  gap: 1rem;
+}
+
+.chart-unavailable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chart-unavailable p {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.unavailable-subtitle {
+  font-size: 0.9rem !important;
+  opacity: 0.7;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  border-color: rgba(139, 92, 246, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f8fafc;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 /* Company Info Section */
 .company-info-section {
-  padding: 2.5rem;
-  background: rgba(15, 15, 15, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  padding: 2rem;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 16px;
 }
 
-.section-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #e2e8f0;
-  margin-bottom: 1.5rem;
+.company-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
 
-.company-tags {
+.info-item {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.tag {
-  padding: 0.5rem 1rem;
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 8px;
-  color: #8b5cf6;
-  font-size: 0.9rem;
-  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 1rem;
 }
 
-.company-description {
+.info-label {
   color: #94a3b8;
-  font-size: 1rem;
-  line-height: 1.8;
-  font-weight: 300;
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.info-value {
+  color: #f8fafc;
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  flex: 1;
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-  .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .stock-price-info {
-    align-items: flex-start;
-  }
-
-  .dashboard-content {
-    grid-template-columns: 1fr;
-  }
-
-  .recommendation-section,
-  .metrics-section,
-  .chart-section,
-  .risk-section {
-    grid-column: 1 / -1;
-  }
-}
-
 @media (max-width: 768px) {
   .analysis-dashboard {
     padding: 1rem;
   }
 
-  .stock-ticker {
+  .back-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .price-section {
+    align-items: flex-start;
+  }
+
+  .stock-symbol {
     font-size: 2rem;
   }
 
   .current-price {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .time-range-selector {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .time-btn {
+    flex: 1;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .company-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .info-value {
+    text-align: left;
   }
 }

@@ -124,6 +124,9 @@
   letter-spacing: 0.1em;
   margin: 0;
   font-family: 'Orbitron', 'Exo 2', sans-serif;
+  /* Prevent resizing during animation */
+  line-height: 1.2;
+  min-height: fit-content;
 }
 
 .obsidian-gradient {
@@ -160,6 +163,9 @@
   letter-spacing: 0.15em;
   margin-bottom: 3rem;
   text-transform: uppercase;
+  /* Prevent resizing during animation */
+  line-height: 1.5;
+  min-height: fit-content;
 }
 
 .hero-description {
@@ -167,10 +173,44 @@
   color: #94a3b8;
   font-size: 0.95rem;
   font-weight: 300;
+  /* Prevent resizing during animation */
+  line-height: 1.5;
+  min-height: fit-content;
+}
+
+/* Breathing animation for search bar */
+.stock-search-container {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  /* Reduce breathing animation on mobile */
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.01); /* Very subtle breathing */
+    }
+  }
+
+  /* Prevent search bar from reaching edge - reduce by 20px on each side */
+  .stock-search-container {
+    max-width: calc(100% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .hero-title {
     font-size: 3rem;
   }
@@ -183,7 +223,46 @@
     font-size: 1rem;
   }
   
+  /* "Precision Trading Intelligence" - Keep on 1 line, no resizing */
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Reserve exact space to prevent layout shift */
+    min-height: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  /* "Advanced quantitative..." - Force 2 lines, no resizing */
+  .hero-description {
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+    white-space: normal;
+    /* Force 2-line display */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /* Reserve exact space for 2 lines */
+    min-height: 2.52rem; /* 0.9rem * 1.4 * 2 */
+    max-height: 2.52rem;
+    margin-top: 1.5rem;
+  }
+
+  /* Prevent all text from shifting during animation */
+  .hero-content * {
+    will-change: auto;
+  }
+
+  /* Add padding to prevent content from touching edges */
+  .hero-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero-content {
+    padding: 1rem;
   }
 }
